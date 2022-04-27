@@ -1,0 +1,46 @@
+﻿<Page
+    x:Class="YAPV.Views.Pages.GalleryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:YAPV.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Grid>
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Hidden"
+            MinZoomFactor="0.1"
+            VerticalScrollBarVisibility="Hidden"
+            ZoomMode="Enabled">
+            <Image Source="{Binding SelectedItem.Path, Mode=OneWay}" />
+        </ScrollViewer>
+        <GridView
+            Height="100"
+            Margin="10"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            ItemsSource="{Binding LibraryItems}"
+            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+            ScrollViewer.HorizontalScrollMode="Enabled"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollMode="Disabled"
+            SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Image
+                        Width="100"
+                        Height="100"
+                        Source="{Binding Path}"
+                        Stretch="UniformToFill" />
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+</Page>

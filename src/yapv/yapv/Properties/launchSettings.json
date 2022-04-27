@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "yapv (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "yapv (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

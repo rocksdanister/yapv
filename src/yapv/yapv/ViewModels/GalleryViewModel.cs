@@ -10,7 +10,7 @@ using YAPV.Models;
 
 namespace YAPV.ViewModels
 {
-    internal class GalleryViewModel : ObservableObject
+    public class GalleryViewModel : ObservableObject
     {
         public GalleryViewModel()
         {

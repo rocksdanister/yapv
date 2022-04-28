@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -15,6 +16,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using YAPV.ViewModels;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -26,6 +28,19 @@ namespace YAPV
     /// </summary>
     public partial class App : Application
     {
+        private readonly IServiceProvider _serviceProvider;
+        /// <summary>
+        /// Gets the <see cref="IServiceProvider"/> instance for the current application instance.
+        /// </summary>
+        public static IServiceProvider Services
+        {
+            get
+            {
+                IServiceProvider serviceProvider = ((App)Current)._serviceProvider;
+                return serviceProvider ?? throw new InvalidOperationException("The service provider is not initialized");
+            }
+        }
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -33,6 +48,7 @@ namespace YAPV
         public App()
         {
             this.InitializeComponent();
+            _serviceProvider = ConfigureServices();
         }
 
         /// <summary>
@@ -42,10 +58,18 @@ namespace YAPV
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            m_window = new MainWindow();
+            var m_window = Services.GetRequiredService<MainWindow>();
             m_window.Activate();
         }
 
-        private Window m_window;
+        private IServiceProvider ConfigureServices()
+        {
+            var provider = new ServiceCollection()
+                .AddSingleton<MainWindow>()
+                .AddSingleton<GalleryViewModel>()
+                .BuildServiceProvider();
+
+            return provider;
+        }
     }
 }

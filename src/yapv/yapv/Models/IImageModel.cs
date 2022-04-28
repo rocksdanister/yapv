@@ -1,6 +1,6 @@
 ﻿namespace YAPV.Models
 {
-    internal interface IImageModel
+    public interface IImageModel
     {
         string Path { get; set; }
         double Width { get; set; }

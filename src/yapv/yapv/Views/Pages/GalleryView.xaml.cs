@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -7,6 +8,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -27,7 +29,14 @@ namespace YAPV.Views.Pages
         public GalleryView()
         {
             this.InitializeComponent();
-            this.DataContext = new GalleryViewModel();
+            var vm = App.Services.GetRequiredService<GalleryViewModel>();
+            this.DataContext = vm;
+            vm.PropertyChanged += (sender, args) => {
+                if (args.PropertyName.Equals("SelectedItem"))
+                {
+                    ScrlImg.ChangeView(0f, 0f, (float)(PreviewRow.ActualHeight / vm.SelectedItem.Height));
+                }
+            };
         }
     }
 }

@@ -5,9 +5,32 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:winex="using:WinUIEx"
-    Title="YAPV"
+    Title=""
     MinWidth="800"
     MinHeight="480"
     mc:Ignorable="d">
-    <Frame x:Name="contentFrame" />
+    <Grid>
+        <!--
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="TitleBar">
+            <Image
+                Width="16"
+                Height="16"
+                Margin="8,0"
+                HorizontalAlignment="Left"
+                Source="ms-appx:///Assets/icon-yapv-48.png" />
+            <TextBlock
+                x:Name="AppTitleTextBlock"
+                Margin="28,0,0,0"
+                VerticalAlignment="Center"
+                Style="{StaticResource CaptionTextBlockStyle}"
+                Text="YAPV"
+                TextWrapping="NoWrap" />
+        </Grid>
+        -->
+        <Frame x:Name="contentFrame" Margin="15" />
+    </Grid>
 </winex:WindowEx>

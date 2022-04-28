@@ -14,6 +14,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using SettingsUI.Helpers;
 using YAPV.Views.Pages;
 using WinUIEx;
 
@@ -31,6 +32,14 @@ namespace YAPV
         {
             this.InitializeComponent();
             contentFrame.Navigate(typeof(GalleryView), null, new DrillInNavigationTransitionInfo());
+
+            //ExtendsContentIntoTitleBar = true;
+            //SetTitleBar(TitleBar);
+            //this.Activated += MainWindow_Activated;
+
+            MaterialHelper.MakeTransparent(this);
+            MaterialHelper.SetBlur(true, true);
+            //MaterialHelper.SetMica(true, true);
         }
     }
 }

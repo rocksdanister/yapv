@@ -5,16 +5,25 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:YAPV.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:media="using:CommunityToolkit.WinUI.UI.Media"
+    xmlns:ui="using:CommunityToolkit.WinUI.UI"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <media:AttachedCardShadow
+            x:Key="CommonShadow"
+            BlurRadius="50"
+            Offset="10" />
+    </Page.Resources>
 
     <Grid>
         <ScrollViewer
+            CornerRadius="10"
             HorizontalScrollBarVisibility="Hidden"
             MinZoomFactor="0.1"
             VerticalScrollBarVisibility="Hidden"
             ZoomMode="Enabled">
-            <Image Source="{Binding SelectedItem.Path, Mode=OneWay}" />
+            <Image ui:Effects.Shadow="{StaticResource CommonShadow}" Source="{Binding SelectedItem.Path, Mode=OneWay}" />
         </ScrollViewer>
         <GridView
             Height="100"
